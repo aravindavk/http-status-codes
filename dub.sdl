@@ -1,0 +1,5 @@
+name "http-status-codes"
+description "List of HTTP Status codes"
+authors "Aravinda VK <mail@aravindavk.in>"
+copyright "Copyright © 2024, Aravinda VK <mail@aravindavk.in>"
+license "MIT"
