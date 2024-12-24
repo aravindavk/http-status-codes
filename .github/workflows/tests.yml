@@ -1,0 +1,35 @@
+name: Unit tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-13, macos-14, windows-latest]
+        dc: [ldc-latest, dmd-latest]
+        exclude:
+          - os: macos-14
+            dc: dmd-latest
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install D compiler
+        uses: dlang-community/setup-dlang@v1
+        with:
+          compiler: ${{ matrix.dc }}
+
+      - name: Run unittests
+        run: dub test
